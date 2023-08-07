@@ -21,4 +21,5 @@ resource "aws_vpc_peering_connection" "peer" {
   peer_owner_id = data.aws_caller_identity.current.account_id
   peer_vpc_id   = "vpc-0724d763db4589c34"
   vpc_id        = aws_vpc.main.id
+  auto_accept   = true
 }
