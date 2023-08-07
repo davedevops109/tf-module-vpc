@@ -24,7 +24,7 @@ resource "aws_vpc_peering_connection" "peer" {
   auto_accept   = true
   tags = merge(
     local.common_tags,
-    { Name = "${var.env}-vpc" }
+    { Name = "${var.env}-peering" }
   )
 }
 
