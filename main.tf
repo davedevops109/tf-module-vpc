@@ -70,6 +70,12 @@ resource "aws_route_table" "public" {
   )
 }
 
+resource "aws_route_table_association" "public-rt-assoc" {
+  count = length(aws_subnet.public)
+  subnet_id      = aws_subnet.public.*.id[count.index]
+  route_table_id = aws_route_table.public.id
+}
+
 //create EC2
 /*data "aws_ami" "centos8" {
   most_recent      = true
