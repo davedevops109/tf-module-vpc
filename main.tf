@@ -115,10 +115,12 @@ resource "aws_route_table_association" "private-rt-assoc" {
   subnet_id      = aws_subnet.private.*.id[count.index]
   route_table_id = aws_route_table.private.id
 }
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
-  //depends_on = [aws_internet_gateway.example]
 
+resource "aws_route" "r" {
+  route_table_id            = data.aws_vpc.default.main_route_table_id
+  destination_cidr_block    = var.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
+}
 
 //create EC2
 data "aws_ami" "centos8" {
