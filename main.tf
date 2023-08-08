@@ -121,7 +121,7 @@ resource "aws_route_table_association" "private-rt-assoc" {
 
 
 //create EC2
-/*data "aws_ami" "centos8" {
+data "aws_ami" "centos8" {
   most_recent      = true
   name_regex       = "Centos-8-DevOps-Practice"
   owners           = ["973714476881"]
@@ -131,7 +131,7 @@ resource "aws_instance" "web" {
   ami                     = data.aws_ami.centos8.id
   instance_type           = "t3.micro"
   vpc_security_group_ids  = [aws_security_group.allow_tls.id]
-  subnet_id               = aws_subnet.main.*.id[0]
+  subnet_id               = aws_subnet.private.*.id[0]
 
   tags = {
     Name = "test-centos8"
@@ -162,4 +162,4 @@ resource "aws_security_group" "allow_tls" {
   tags = {
     Name = "allow_tls"
   }
-}*/
+}
