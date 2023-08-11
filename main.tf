@@ -27,10 +27,10 @@ resource "aws_route" "r" {
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
-  tags = merge{
+  tags = merge(
     locals.common_tags,
     { Name = "${var.env}-igw" }
-  }
+  )
 }
 
 resource "aws_route" "internet_gw_route" {
