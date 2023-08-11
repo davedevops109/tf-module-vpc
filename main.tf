@@ -28,7 +28,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = merge(
-    locals.common_tags,
+    local.common_tags,
     { Name = "${var.env}-igw" }
   )
 }
