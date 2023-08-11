@@ -24,3 +24,18 @@ resource "aws_route" "r" {
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
 }
 
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.main.id
+
+  tags = merge{
+    locals.common_tags,
+    { Name = "${var.env}-igw" }
+  }
+}
+
+resource "aws_route" "internet_gw_route" {
+  count                       = var.internet_gw == null ? 0 : 1
+  route_table_id              = aws_route_table.route_table.id
+  destination_ipv6_cidr_block = "0.0.0.0/0"
+  gateway_id                  = var.internet_gw
+}
