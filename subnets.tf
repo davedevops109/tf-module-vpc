@@ -1,11 +1,10 @@
-module "subnets" {
+module "public_subnets" {
   source              = "./subnets"
 
   default_vpc_id      = var.default_vpc_id
   env                 = var.env
   availability_zone   = var.availability_zone
-
-  for_each            = var.subnets
+  for_each            = var.public_subnets
   cidr_block          = each.value.cidr_block
   name                = each.value.name
   internet_gw         = lookup(each.value, "internet_gw", false)
